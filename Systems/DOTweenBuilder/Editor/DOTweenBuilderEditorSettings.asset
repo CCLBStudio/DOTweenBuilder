@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9358986c700fe8f49b02e0b9d5573ba5, type: 3}
+  m_Name: DOTweenBuilderEditorSettings
+  m_EditorClassIdentifier: 
+  deleteButtonColor: {r: 1, g: 0, b: 0, a: 1}
+  foldoutColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  addNewButtonColor: {r: 1, g: 1, b: 1, a: 1}
+  iconNormalValue: {fileID: 2800000, guid: e1889e0295b813a4c851c135abad2f0f, type: 3}
+  iconScriptableValue: {fileID: 2800000, guid: 2f17df526da10584bbfbac8fca47ee73, type: 3}
+  foldersToIgnore:
+  - Editor
+  - Main
+  templateFiles:
+  - id: DOTweenScriptableValue
+    fileName: 80-C# DOTween Builder Script__DOTween SO Value-NewDOTweenScriptableValue.cs
+    fileContent: "using UnityEngine;\r\nusing DG.Tweening;\nnamespace ReaaliStudio.Systems.DOTweenBuilder\r\n{\r\n   
+      [CreateAssetMenu(menuName = \"Reaali/Systems/DOTween Builder/Values/#SCRIPTNAME#\",
+      fileName = \"New#SCRIPTNAME#\")]\r\n    public class #SCRIPTNAME# : DOTweenScriptableValue<TYPE>\r\n   
+      {\r\n    }\r\n}\r"
+  - id: DOTweenVariable
+    fileName: 80-C# DOTween Builder Script__DOTween Variable-NewDOTweenVariable.cs
+    fileContent: "using System;\r\nusing DG.Tweening;\nusing UnityEngine;\nnamespace
+      ReaaliStudio.Systems.DOTweenBuilder\r\n{\r\n    [Serializable]\n    public
+      class #SCRIPTNAME# : DOTweenVariable<TYPE, SCRIPTABLETYPE>\r\n    {\r\n       
+      public #SCRIPTNAME#(TYPE defaultValue) : base(defaultValue)\r\n        {\n       
+      }\n    }\r\n}\r"
