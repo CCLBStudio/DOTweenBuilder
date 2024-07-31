@@ -19,7 +19,7 @@ MonoBehaviour:
   iconScriptableValue: {fileID: 2800000, guid: 2f17df526da10584bbfbac8fca47ee73, type: 3}
   foldersToIgnore:
   - Editor
-  - Main
+  - Runtime
   templateFiles:
   - id: DOTweenScriptableValue
     fileName: 80-C# DOTween Builder Script__DOTween SO Value-NewDOTweenScriptableValue.cs

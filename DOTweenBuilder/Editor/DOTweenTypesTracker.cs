@@ -26,7 +26,7 @@ namespace CCLBStudio.DTB
             }
 
             string parentFolder = Directory.GetParent(settingsFolder)?.FullName;
-            string scriptableValueFolder = parentFolder + "/Main/ScriptableAsVariable/";
+            string scriptableValueFolder = parentFolder + "/Runtime/ScriptableAsVariable/";
             
             //TrackElementTypes(parentFolder, settings);
             TrackScriptableTypes(scriptableValueFolder);
