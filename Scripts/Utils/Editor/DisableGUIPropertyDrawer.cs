@@ -1,13 +1,16 @@
 using UnityEditor;
 using UnityEngine;
 
-[CustomPropertyDrawer(typeof(DisableGUIAttribute))]
-public class DisableGUIPropertyDrawer : PropertyDrawer
+namespace CCLBStudio.DTB
 {
-    public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
+    [CustomPropertyDrawer(typeof(DisableGUIAttribute))]
+    public class DisableGUIPropertyDrawer : PropertyDrawer
     {
-        GUI.enabled = false;
-        EditorGUILayout.PropertyField(property);
-        GUI.enabled = true;
+        public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
+        {
+            GUI.enabled = false;
+            EditorGUILayout.PropertyField(property);
+            GUI.enabled = true;
+        }
     }
 }
