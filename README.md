@@ -21,4 +21,4 @@ You (obviously) need to have DOTween installed in your project. If you don't, ma
 If you want to go for the zip file method, simply download the project as a zip file, unzip it and add the DOTweenBuilder folder in your project. It can be added anywhere, as long as it is in the Assets folder.
 
 #### Cloning the project
-You can also clone the project anywhere you want in your Unity project.
+You can also clone the project anywhere you want in your Unity project. The url for the git clone command is the following : https://github.com/AymNAym/DOTweenBuilder.git
