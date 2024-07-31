@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9358986c700fe8f49b02e0b9d5573ba5, type: 3}
   m_Name: DOTweenBuilderEditorSettings
   m_EditorClassIdentifier: 
-  deleteButtonColor: {r: 1, g: 0, b: 0, a: 1}
+  deleteButtonColor: {r: 1, g: 0.1273585, b: 0.15944125, a: 1}
   foldoutColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-  addNewButtonColor: {r: 1, g: 1, b: 1, a: 1}
+  addNewButtonColor: {r: 0, g: 1, b: 0.90802145, a: 1}
   iconNormalValue: {fileID: 2800000, guid: e1889e0295b813a4c851c135abad2f0f, type: 3}
   iconScriptableValue: {fileID: 2800000, guid: 2f17df526da10584bbfbac8fca47ee73, type: 3}
   foldersToIgnore:
