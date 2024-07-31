@@ -20,6 +20,6 @@ You (obviously) need to have DOTween installed in your project. If you don't, ma
 #### Downloading The Zip File
 If you want to go for the zip file method, simply download the project as a zip file, unzip it and add the DOTweenBuilder folder in your project. It can be added anywhere, as long as it is in the Assets folder.
 
-#### Using The Package Manager (2018.3 or later) NOT YET AVAILABLE
+#### Using The Package Manager (2018.3 or later)
 For this method, open the Package Manager tab in your Unity project (Window/Package Manager). Click the "+" button (top left of the window) and select "Add package from git URL..."
 Enter the following url : https://github.com/AymNAym/DOTweenBuilder.git
