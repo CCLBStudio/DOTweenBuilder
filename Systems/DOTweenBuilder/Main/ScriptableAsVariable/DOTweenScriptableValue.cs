@@ -3,7 +3,7 @@ using UnityEditor;
 #endif
 using UnityEngine;
 
-namespace CCLBStudio.Systems.DOTweenBuilder
+namespace CCLBStudio.DTB
 {
     public abstract class DOTweenScriptableValue<T> : ScriptableObject
     {

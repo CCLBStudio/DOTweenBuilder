@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace CCLBStudio.Systems.DOTweenBuilder
+namespace CCLBStudio.DTB
 {
     [CreateAssetMenu(menuName = "Reaali/Systems/DOTween Builder/Values/Absorb Type Value", fileName = "NewAbsorbTypeValue")]
     public class DOTweenAbsorbTypeValue : DOTweenScriptableValue<AbsorbType>

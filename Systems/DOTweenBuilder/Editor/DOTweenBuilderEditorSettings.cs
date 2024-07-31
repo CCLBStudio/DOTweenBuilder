@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace CCLBStudio.Systems.DOTweenBuilder
+namespace CCLBStudio.DTB
 {
     [CreateAssetMenu(menuName = "Reaali/Systems/DOTween Builder/Editor Settings", fileName = "DOTweenBuilderEditorSettings")]
     public class DOTweenBuilderEditorSettings : ScriptableObject

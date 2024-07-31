@@ -1,4 +1,4 @@
-namespace CCLBStudio.Systems.DOTweenBuilder
+namespace CCLBStudio.DTB
 {
     public enum AbsorbType
     {

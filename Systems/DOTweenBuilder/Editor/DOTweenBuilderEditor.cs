@@ -7,7 +7,7 @@ using UnityEditor;
 using UnityEditorInternal;
 using UnityEngine;
 
-namespace CCLBStudio.Systems.DOTweenBuilder
+namespace CCLBStudio.DTB
 {
     [CustomEditor(typeof(DOTweenBuilder))]
     public class DOTweenBuilderEditor : Editor

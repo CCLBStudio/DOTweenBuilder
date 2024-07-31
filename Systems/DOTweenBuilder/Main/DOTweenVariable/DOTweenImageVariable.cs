@@ -1,7 +1,7 @@
 using System;
 using UnityEngine.UI;
 
-namespace CCLBStudio.Systems.DOTweenBuilder
+namespace CCLBStudio.DTB
 {
     [Serializable]
     public class DOTweenImageVariable : DOTweenVariable<Image, DOTweenImageValue>

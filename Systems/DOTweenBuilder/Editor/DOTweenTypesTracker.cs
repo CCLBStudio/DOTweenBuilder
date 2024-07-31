@@ -6,7 +6,7 @@ using CCLBStudio.Utils;
 using UnityEditor;
 using UnityEngine;
 
-namespace CCLBStudio.Systems.DOTweenBuilder
+namespace CCLBStudio.DTB
 {
     [InitializeOnLoad]
     public static class DOTweenTypesTracker

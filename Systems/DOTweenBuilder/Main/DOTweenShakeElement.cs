@@ -2,7 +2,7 @@ using System;
 using DG.Tweening;
 using UnityEngine;
 
-namespace CCLBStudio.Systems.DOTweenBuilder
+namespace CCLBStudio.DTB
 {
     [Serializable]
     public abstract class DOTweenShakeElement<T> : DOTweenGenericElement<T, Vector3>

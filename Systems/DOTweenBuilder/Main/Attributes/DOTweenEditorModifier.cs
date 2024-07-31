@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEditor;
 
 #if UNITY_EDITOR
-namespace CCLBStudio.Systems.DOTweenBuilder
+namespace CCLBStudio.DTB
 {
     public abstract class DOTweenEditorModifier
     {

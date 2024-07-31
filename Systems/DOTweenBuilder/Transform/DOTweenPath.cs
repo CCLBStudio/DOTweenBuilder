@@ -3,7 +3,7 @@ using System.Linq;
 using DG.Tweening;
 using UnityEngine;
 
-namespace CCLBStudio.Systems.DOTweenBuilder
+namespace CCLBStudio.DTB
 {
     [Serializable]
 #if UNITY_EDITOR

@@ -1,7 +1,7 @@
 using System;
 using DG.Tweening;
 using UnityEngine;
-namespace CCLBStudio.Systems.DOTweenBuilder
+namespace CCLBStudio.DTB
 {
     [Serializable]
     public class DOTweenVector3Variable : DOTweenVariable<Vector3, DOTweenVector3Value>

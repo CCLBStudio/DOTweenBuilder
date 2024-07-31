@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using UnityEditor;
 
-namespace CCLBStudio.Systems.DOTweenBuilder
+namespace CCLBStudio.DTB
 {
     public class DOTweenPathEditorModifier : DOTweenEditorModifier
     {

@@ -1,6 +1,6 @@
 using System;
 
-namespace CCLBStudio.Systems.DOTweenBuilder
+namespace CCLBStudio.DTB
 {
     [Serializable]
     public enum DOTweenAxis2D

@@ -1,9 +1,9 @@
 using System;
-using CCLBStudio.Systems.DOTweenBuilder;
+using CCLBStudio.DTB;
 using DG.Tweening;
 using UnityEngine;
 
-namespace CCLBStudio.Systems.DOTweenBuilder
+namespace CCLBStudio.DTB
 {
     [Serializable]
     public class DOTweenPunchAnchorPos : DOTweenPunchElement<RectTransform>

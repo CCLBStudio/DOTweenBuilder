@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace CCLBStudio.Systems.DOTweenBuilder
+namespace CCLBStudio.DTB
 {
     [Serializable]
     public class DOTweenVariable<T, SV> where SV : DOTweenScriptableValue<T>

@@ -2,7 +2,7 @@ using System;
 using DG.Tweening;
 using TMPro;
 
-namespace CCLBStudio.Systems.DOTweenBuilder
+namespace CCLBStudio.DTB
 {
     public static class DOTweenExtender
     {
