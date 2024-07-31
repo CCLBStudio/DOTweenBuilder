@@ -1,5 +1,5 @@
 using System.IO;
-using CCLBStudio.Utils;
+using CCLBStudio;
 using DG.Tweening;
 using TMPro;
 using UnityEditor;
