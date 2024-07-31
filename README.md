@@ -10,3 +10,11 @@ Almost every parameter has two ways to set its value : the first is the default 
 ## How To Use
 When you want to create a new tween effect simply add the component DOTweenBuilder on one of your GameObjects. To add a new effect, click the "New" button and select the one you desire. Once selected, a new entry will be created in
 the list and you can tweak its settings as you need. You will then need a reference to this DOTweenBuilder and call its Play() method.
+
+## Installation
+
+#### Requirement
+
+You (obviously) need to have DOTween installed in your project. If you don't, make sure to install it before you import this repository.
+
+#### 
