@@ -1,0 +1,20 @@
+{
+  "name": "com.cclbstudio.dotweenbuilder",
+  "version": "1.0.0",
+  "displayName": "DOTween Builder",
+  "description": "A tool for the Unity DOTween package (by Demigiant), allowing you to easily create complex effects without coding anything.",
+  "unity": "2022.3.17",
+  "dependencies": {
+  },
+  "keywords": [
+    "dotween",
+    "builder",
+    "tool",
+    "plugin"
+  ],
+  "author": {
+    "name": "CCLB Studio",
+    "email": "cclbstudio@gmail.com",
+    "url": "https://github.com/AymNAym/DOTweenBuilder.git"
+  }
+}
