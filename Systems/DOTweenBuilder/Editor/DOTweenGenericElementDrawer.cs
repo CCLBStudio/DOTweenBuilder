@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using CCLBStudio.Utils.Extensions;
+using CCLBStudio.Utils;
 using UnityEditor;
 using UnityEngine;
 

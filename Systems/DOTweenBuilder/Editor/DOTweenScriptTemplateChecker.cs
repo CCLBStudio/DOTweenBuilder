@@ -1,5 +1,5 @@
 using System.IO;
-using CCLBStudio.Utils.Extensions;
+using CCLBStudio.Utils;
 using UnityEditor;
 using UnityEngine;
 

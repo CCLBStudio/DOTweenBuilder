@@ -7,7 +7,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace CCLBStudio.Utils.Extensions
+namespace CCLBStudio.Utils
 {
     public static class EditorExtender
     {

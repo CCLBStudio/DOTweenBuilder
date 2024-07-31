@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using CCLBStudio.Utils.Extensions;
+using CCLBStudio.Utils;
 using UnityEditor;
 using UnityEditorInternal;
 using UnityEngine;

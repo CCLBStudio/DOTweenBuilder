@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "displayName": "DOTween Builder",
   "description": "A tool for the Unity DOTween package (by Demigiant), allowing you to easily create complex effects without coding anything.",
-  "unity": "2019.2",
+  "unity": "2019.4",
   "dependencies": {
   },
   "keywords": [
