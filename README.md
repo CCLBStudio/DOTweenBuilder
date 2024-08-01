@@ -12,7 +12,7 @@ When you want to create a new tween effect simply add the component DOTweenBuild
 the list and you can tweak its settings as you need. You will then need a reference to this DOTweenBuilder and call its Play() method.
 
 ## Installation
-You can add this tool to your project by downloading the project as a zip file and then add it to your project, or by using the Unity Package Manager (recommended)
+You can add this tool to your project by downloading the unity package file in the release section or by cloning the repository in your project.
 
 #### Requirement
 You (obviously) need to have DOTween installed in your project. If you don't, make sure to install it before you import this repository.
@@ -20,8 +20,8 @@ You (obviously) need to have DOTween installed in your project. If you don't, ma
 #### Downloading The Unity Package
 The simplest solution is to download the .unitypackage file that is the release section.
 
-#### Downloading The Zip File
-If you want to go for the zip file method, simply download the project as a zip file, unzip it and add the DOTweenBuilder folder in your project. It can be added anywhere, as long as it is in the Assets folder.
-
 #### Cloning the project
 You can also clone the project anywhere you want in your Unity project. The url for the git clone command is the following : https://github.com/AymNAym/DOTweenBuilder.git
+
+#### Downloading The Zip File
+If you want to go for the zip file method, simply download the project as a zip file, unzip it and add the DOTweenBuilder folder in your project. It can be added anywhere, as long as it is in the Assets folder.
