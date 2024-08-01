@@ -13,14 +13,14 @@ namespace CCLBStudio.DOTweenBuilder
         public static string ValueVariableProperty => nameof(value);
         public static string ValueNameProperty => nameof(valueName);
 
-        protected T Target => target.Value;
-        protected TV Value => value.Value;
-
         protected virtual string GetDesiredValueName() => "End Value";
         [SerializeField] protected string valueName;
 
 #endif
         #endregion
+        
+        protected T Target => target.Value;
+        protected TV Value => value.Value;
         
         [SerializeField] private DOTweenVariable<T, DOTweenScriptableValue<T>> target;
         [SerializeField] private DOTweenVariable<TV, DOTweenScriptableValue<TV>> value;
