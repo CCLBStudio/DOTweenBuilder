@@ -17,6 +17,9 @@ You can add this tool to your project by downloading the project as a zip file a
 #### Requirement
 You (obviously) need to have DOTween installed in your project. If you don't, make sure to install it before you import this repository.
 
+#### Downloading The Unity Package
+The simplest solution is to download the .unitypackage file that is the release section.
+
 #### Downloading The Zip File
 If you want to go for the zip file method, simply download the project as a zip file, unzip it and add the DOTweenBuilder folder in your project. It can be added anywhere, as long as it is in the Assets folder.
 
