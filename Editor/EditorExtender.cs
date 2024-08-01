@@ -487,12 +487,10 @@ namespace CCLBStudioEditor
 
             if (assetPath.Length <= 0)
             {
-                Debug.LogError($"There is no asset of type {typeof(T).Name} in the project.");
                 return null;
             }
 
             T result = (T)AssetDatabase.LoadAssetAtPath(AssetDatabase.GUIDToAssetPath(assetPath[0]), typeof(T));
-
             return result;
         }
         
@@ -502,7 +500,6 @@ namespace CCLBStudioEditor
 
             if (assetPath.Length <= 0)
             {
-                Debug.LogError($"There is no asset of type {typeof(T).Name} in the project.");
                 return null;
             }
 

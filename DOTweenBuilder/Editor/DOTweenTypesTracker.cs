@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using CCLBStudio;
 using CCLBStudioEditor;
 using UnityEditor;
 using UnityEngine;
@@ -15,6 +14,10 @@ namespace CCLBStudio.DOTweenBuilder
         static DOTweenTypesTracker()
         {
             var settings = EditorExtender.LoadScriptableAsset<DOTweenBuilderEditorSettings>();
+            if (!settings)
+            {
+                return;
+            }
             
             string relativePath = AssetDatabase.GetAssetPath(settings);
             string absolutePath = Path.GetFullPath(relativePath);
