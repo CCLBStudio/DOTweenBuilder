@@ -18,7 +18,7 @@ You can add this tool to your project by downloading the unity package file in t
 You (obviously) need to have DOTween installed in your project. If you don't, make sure to install it before you import this repository.
 
 #### Downloading The Unity Package
-The simplest solution is to download the .unitypackage file that is the release section.
+The simplest solution is to download the .unitypackage file that is in the release section.
 <br>
 You can click here :
 [Download the unitypackage](https://github.com/AymNAym/DOTweenBuilder/releases/download/v1.0.0/DOTweenBuilder-1.0.0.unitypackage)
