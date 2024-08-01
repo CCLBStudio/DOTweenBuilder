@@ -20,8 +20,7 @@ You (obviously) need to have DOTween installed in your project. If you don't, ma
 #### Downloading The Unity Package
 The simplest solution is to download the .unitypackage file that is in the release section.
 <br>
-You can click here :
-[Download the unitypackage](https://github.com/AymNAym/DOTweenBuilder/releases/download/v1.0.0/DOTweenBuilder-1.0.0.unitypackage)
+[![Download UnityPackage](https://img.shields.io/badge/download-unitypackage-blue.svg)](https://github.com/AymNAym/DOTweenBuilder/releases/download/v1.0.0/DOTweenBuilder-1.0.0.unitypackage)
 
 #### Cloning the project
 You can also clone the project anywhere you want in your Unity project. The url for the git clone command is the following : https://github.com/AymNAym/DOTweenBuilder.git
