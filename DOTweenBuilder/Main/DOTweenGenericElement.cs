@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace CCLBStudio.DTB
+namespace CCLBStudio.DOTweenBuilder
 {
     [Serializable]
     public abstract class DOTweenGenericElement<T, TV> : DOTweenElement

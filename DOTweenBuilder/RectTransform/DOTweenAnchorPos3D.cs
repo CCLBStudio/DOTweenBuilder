@@ -2,7 +2,7 @@ using System;
 using DG.Tweening;
 using UnityEngine;
 
-namespace CCLBStudio.DTB
+namespace CCLBStudio.DOTweenBuilder
 {
     [Serializable]
     public class DOTweenAnchorPos3D : DOTweenGenericElement<RectTransform, Vector3>

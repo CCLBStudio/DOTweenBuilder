@@ -1,12 +1,13 @@
 using System.IO;
 using CCLBStudio;
+using CCLBStudioEditor;
 using DG.Tweening;
 using TMPro;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace CCLBStudio.DTB
+namespace CCLBStudio.DOTweenBuilder
 {
     public class DOTweenTemplateCreateWindow : EditorWindow
     {
@@ -44,56 +45,54 @@ namespace CCLBStudio.DTB
                         return;
                     }
 
-                    string variableTemplate = _settings.templateFiles[variableIndex].fileContent;
-                    string scriptableValueTemplate = _settings.templateFiles[scriptableValueIndex].fileContent;
+                    // string variableTemplate = _settings.templateFiles[variableIndex].fileContent;
+                    // string scriptableValueTemplate = _settings.templateFiles[scriptableValueIndex].fileContent;
+                    //
+                    // string relativePath = AssetDatabase.GetAssetPath(_settings);
+                    // string parent = Directory.GetParent(relativePath)?.FullName;
+                    // string mainFolder = parent + "/Main/";
+                    // string scriptableValueFolder = mainFolder + "ScriptableAsVariable/";
+                    // string variableFolder = mainFolder + "DOTweenVariable/";
+                    // bool createdOne = false;
                     
-                    string relativePath = AssetDatabase.GetAssetPath(_settings);
-                    string parent = Directory.GetParent(relativePath)?.FullName;
-                    string mainFolder = parent + "/Main/";
-                    string scriptableValueFolder = mainFolder + "ScriptableAsVariable/";
-                    string variableFolder = mainFolder + "DOTweenVariable/";
-                    bool createdOne = false;
-                    Debug.Log(scriptableValueFolder);
-                    return;
-                    
-                    foreach (var typeName in DefaultTypes)
-                    {
-                        string typeCapitalized = char.ToUpper(typeName[0]) + typeName.Substring(1);
-                        bool hasPrefix = typeCapitalized.StartsWith("DOTween");
-                        string scriptableValueName = hasPrefix ? $"{typeCapitalized}Value" : $"DOTween{typeCapitalized}Value";
-                        string scriptableValuePath = scriptableValueFolder + scriptableValueName + ".cs";
-                        string variableName = hasPrefix ? $"{typeCapitalized}Variable" : $"DOTween{typeCapitalized}Variable";
-                        string variablePath = variableFolder + variableName + ".cs";
-                        string realTypeName = typeName.EndsWith("Array") ? typeName.Replace("Array", "[]") : typeName;
-
-                        if (!File.Exists(scriptableValuePath))
-                        {
-                            string content = scriptableValueTemplate.Replace("#SCRIPTNAME#", scriptableValueName).Replace("TYPE", realTypeName);
-                            File.WriteAllText(scriptableValuePath, content);
-                            createdOne = true;
-                        }
-                        else
-                        {
-                            Debug.Log($"Script {scriptableValueName} already exist.");
-                        }
-
-                        if (!File.Exists(variablePath))
-                        {
-                            string content = variableTemplate.Replace("#SCRIPTNAME#", variableName).Replace("SCRIPTABLETYPE", scriptableValueName).Replace("TYPE", realTypeName);
-                            File.WriteAllText(variablePath, content);
-                            createdOne = true;
-                        }
-                        else
-                        {
-                            Debug.Log($"Script {variableName} already exist.");
-                        }
-                    }
-
-                    if (createdOne)
-                    {
-                        AssetDatabase.SaveAssets();
-                        AssetDatabase.Refresh();
-                    }
+                    // foreach (var typeName in DefaultTypes)
+                    // {
+                    //     string typeCapitalized = char.ToUpper(typeName[0]) + typeName.Substring(1);
+                    //     bool hasPrefix = typeCapitalized.StartsWith("DOTween");
+                    //     string scriptableValueName = hasPrefix ? $"{typeCapitalized}Value" : $"DOTween{typeCapitalized}Value";
+                    //     string scriptableValuePath = scriptableValueFolder + scriptableValueName + ".cs";
+                    //     string variableName = hasPrefix ? $"{typeCapitalized}Variable" : $"DOTween{typeCapitalized}Variable";
+                    //     string variablePath = variableFolder + variableName + ".cs";
+                    //     string realTypeName = typeName.EndsWith("Array") ? typeName.Replace("Array", "[]") : typeName;
+                    //
+                    //     if (!File.Exists(scriptableValuePath))
+                    //     {
+                    //         string content = scriptableValueTemplate.Replace("#SCRIPTNAME#", scriptableValueName).Replace("TYPE", realTypeName);
+                    //         File.WriteAllText(scriptableValuePath, content);
+                    //         createdOne = true;
+                    //     }
+                    //     else
+                    //     {
+                    //         Debug.Log($"Script {scriptableValueName} already exist.");
+                    //     }
+                    //
+                    //     if (!File.Exists(variablePath))
+                    //     {
+                    //         string content = variableTemplate.Replace("#SCRIPTNAME#", variableName).Replace("SCRIPTABLETYPE", scriptableValueName).Replace("TYPE", realTypeName);
+                    //         File.WriteAllText(variablePath, content);
+                    //         createdOne = true;
+                    //     }
+                    //     else
+                    //     {
+                    //         Debug.Log($"Script {variableName} already exist.");
+                    //     }
+                    // }
+                    //
+                    // if (createdOne)
+                    // {
+                    //     AssetDatabase.SaveAssets();
+                    //     AssetDatabase.Refresh();
+                    // }
                 }
                 
                 return;

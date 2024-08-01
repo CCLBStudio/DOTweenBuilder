@@ -3,7 +3,7 @@ using DG.Tweening;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace CCLBStudio.DTB
+namespace CCLBStudio.DOTweenBuilder
 {
     [Serializable]
     public abstract class DOTweenElement

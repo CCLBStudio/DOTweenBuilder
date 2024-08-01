@@ -1,18 +1,18 @@
 using System.IO;
 using CCLBStudio;
+using CCLBStudioEditor;
 using UnityEditor;
 using UnityEngine;
 
-namespace CCLBStudio.DTB
+namespace CCLBStudio.DOTweenBuilder
 {
-    [InitializeOnLoad]
+    //[InitializeOnLoad]
     public static class DOTweenScriptTemplateChecker
     {
         private const string ScriptTemplateFolder = "ScriptTemplates";
 
         static DOTweenScriptTemplateChecker()
         {
-            return;
             EditorApplication.quitting += OnQuit;
 
             if (PlayerPrefs.GetInt(DOTweenBuilderEditorSettings.PlayerPrefNeverCheckTemplateAgain, -1) != -1)

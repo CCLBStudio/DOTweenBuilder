@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace CCLBStudio.DTB
+namespace CCLBStudio.Attributes
 {
     public class DisableGUIAttribute : PropertyAttribute
     {

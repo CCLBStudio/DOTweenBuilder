@@ -1,6 +1,6 @@
 using UnityEngine;
 using DG.Tweening;
-namespace CCLBStudio.DTB
+namespace CCLBStudio.DOTweenBuilder
 {
     [CreateAssetMenu(menuName = "Reaali/Systems/DOTween Builder/Values/DOTweenGameObjectValue", fileName = "NewDOTweenGameObjectValue")]
     public class DOTweenGameObjectValue : DOTweenScriptableValue<GameObject>

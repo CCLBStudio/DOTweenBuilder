@@ -1,10 +1,11 @@
 using System;
 using System.Collections.Generic;
 using CCLBStudio;
+using CCLBStudioEditor;
 using UnityEditor;
 using UnityEngine;
 
-namespace CCLBStudio.DTB
+namespace CCLBStudio.DOTweenBuilder
 {
     [CustomPropertyDrawer(typeof(DOTweenGenericElement<,>), true)]
     public class DOTweenGenericElementDrawer : PropertyDrawer

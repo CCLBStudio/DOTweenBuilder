@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using CCLBStudio;
+using CCLBStudioEditor;
 using UnityEditor;
 using UnityEngine;
 
-namespace CCLBStudio.DTB
+namespace CCLBStudio.DOTweenBuilder
 {
     [InitializeOnLoad]
     public static class DOTweenTypesTracker

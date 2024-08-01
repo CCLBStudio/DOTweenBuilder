@@ -2,7 +2,7 @@ using System;
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
-namespace CCLBStudio.DTB
+namespace CCLBStudio.DOTweenBuilder
 {
     [Serializable]
     public class DOTweenTextMeshProUGUIVariable : DOTweenVariable<TextMeshProUGUI, DOTweenTextMeshProUGUIValue>

@@ -1,6 +1,6 @@
 using System;
 
-namespace CCLBStudio.DTB
+namespace CCLBStudio.DOTweenBuilder
 {
     [AttributeUsage(AttributeTargets.Class)]
     public class DOTweenEditorModifierAttribute : Attribute

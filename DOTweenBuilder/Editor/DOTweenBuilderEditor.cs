@@ -2,12 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using CCLBStudio;
+using CCLBStudioEditor;
 using UnityEditor;
 using UnityEditorInternal;
 using UnityEngine;
 
-namespace CCLBStudio.DTB
+namespace CCLBStudio.DOTweenBuilder
 {
     [CustomEditor(typeof(DOTweenBuilder))]
     public class DOTweenBuilderEditor : Editor

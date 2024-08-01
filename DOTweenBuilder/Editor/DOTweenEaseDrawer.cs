@@ -1,7 +1,7 @@
 using UnityEditor;
 using UnityEngine;
 
-namespace CCLBStudio.DTB
+namespace CCLBStudio.DOTweenBuilder
 {
     [CustomPropertyDrawer(typeof(DOTweenEase))]
     public class DOTweenEaseDrawer : PropertyDrawer

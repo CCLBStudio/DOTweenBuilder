@@ -1,9 +1,9 @@
 using System;
-using CCLBStudio.DTB;
+using CCLBStudio.DOTweenBuilder;
 using DG.Tweening;
 using UnityEngine;
 
-namespace CCLBStudio.DTB
+namespace CCLBStudio.DOTweenBuilder
 {
     [Serializable]
     public class DOTweenPunchScale : DOTweenPunchElement<Transform>

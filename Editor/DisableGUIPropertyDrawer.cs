@@ -1,7 +1,8 @@
+using CCLBStudio.Attributes;
 using UnityEditor;
 using UnityEngine;
 
-namespace CCLBStudio.DTB
+namespace CCLBStudioEditor
 {
     [CustomPropertyDrawer(typeof(DisableGUIAttribute))]
     public class DisableGUIPropertyDrawer : PropertyDrawer

@@ -1,9 +1,10 @@
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
+using CCLBStudio.Attributes;
 using UnityEngine;
 
-namespace CCLBStudio.DTB
+namespace CCLBStudio.DOTweenBuilder
 {
     public abstract class DOTweenScriptableValue<T> : ScriptableObject
     {

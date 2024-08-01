@@ -1,6 +1,6 @@
 using System;
 
-namespace CCLBStudio.DTB
+namespace CCLBStudio.DOTweenBuilder
 {
     public struct DOTweenTrackedType
     {
