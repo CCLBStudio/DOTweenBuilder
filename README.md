@@ -22,8 +22,21 @@ The simplest solution is to download the .unitypackage file that is in the relea
 <br>
 [![Download UnityPackage](https://img.shields.io/badge/download-unitypackage-blue.svg)](https://github.com/AymNAym/DOTweenBuilder/releases/download/v1.0.0/DOTweenBuilder-1.0.0.unitypackage)
 
-#### Cloning the project
+#### Cloning The Project
 You can also clone the project anywhere you want in your Unity project. The url for the git clone command is the following : https://github.com/AymNAym/DOTweenBuilder.git
 
 #### Downloading The Zip File
 If you want to go for the zip file method, simply download the project as a zip file, unzip it and add the DOTweenBuilder folder in your project. It can be added anywhere, as long as it is in the Assets folder.
+
+## Documentation
+### WARNING
+#### The DOTween Builder system is strongly dependant on its folder hierachy. You can move the main folder anywhere you want in your project, but do not change its internal structure.
+When you call the Play() method you basically create a new Sequence and you populate it with the tweens you set up. It means that once you called the Play() method, any setting changed will not be taken into account unless you recall the Play() method.
+<br>
+Mostly every parameter is tagged with a Tooltip attribute to help you understand its goal.
+
+### DOTween Builder Settings
+Most of the settings of this component are straightforward, except maybe the Play Conflict Strategy : this setting determines how the builder will behave if you call the Play() method while a current sequence is still playing.
+
+### Element Settings
+Each existing element has a combination of common and unique settings. If you are not sure what a setting does, refer yourself to the official DOTween documentation : https://dotween.demigiant.com/documentation.php
