@@ -7,11 +7,11 @@ namespace CCLBStudio.DOTweenBuilder
     [Serializable]
     public class DOTweenMove : DOTweenGenericElement<Transform, Vector3>
     {
-        [SerializeField] private Space space = Space.World;
+        [SerializeField] private DOTweenSpaceVariable space = new(Space.World);
         
         public override Tween Generate()
         {
-            return space == Space.Self ? Target.DOLocalMove(Value, Duration, SnapToInteger) : Target.DOMove(Value, Duration, SnapToInteger);
+            return space.Value == Space.Self ? Target.DOLocalMove(Value, Duration, SnapToInteger) : Target.DOMove(Value, Duration, SnapToInteger);
         }
     }
 }

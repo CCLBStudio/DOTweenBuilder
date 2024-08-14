@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Text.RegularExpressions;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
@@ -487,10 +488,13 @@ namespace CCLBStudioEditor
 
             if (assetPath.Length <= 0)
             {
+                Debug.LogError($"There is no asset of type {typeof(T).Name} in the project.");
                 return null;
             }
 
             T result = (T)AssetDatabase.LoadAssetAtPath(AssetDatabase.GUIDToAssetPath(assetPath[0]), typeof(T));
+            Debug.Log($"There is {assetPath.Length.ToString()} asset(s) of type {typeof(T).Name}. The first one will be returned (asset name : {result.name}).");
+
             return result;
         }
         
@@ -500,6 +504,7 @@ namespace CCLBStudioEditor
 
             if (assetPath.Length <= 0)
             {
+                Debug.LogError($"There is no asset of type {typeof(T).Name} in the project.");
                 return null;
             }
 
@@ -554,7 +559,7 @@ namespace CCLBStudioEditor
             GUILayout.BeginHorizontal();
             EditorGUILayout.LabelField(new GUIContent(label), GUILayout.Width(EditorGUIUtility.labelWidth - EditorGUI.indentLevel * 15));
 
-            if (values.Length <= 0)
+            if (values == null || values.Length <= 0)
             {
                 EditorGUILayout.HelpBox(string.IsNullOrEmpty(customMessage) ? $"You asked for a Popup for content {label} but you provided an empty values array." : customMessage, MessageType.Warning);
                 GUILayout.EndHorizontal();
@@ -570,6 +575,112 @@ namespace CCLBStudioEditor
             
             GUILayout.EndHorizontal();
             return result;
+        }
+        
+        public static Type GetUnderlyingPropertyType(SerializedProperty property)
+        {
+            EnsureReflection(property);
+            var type = property.serializedObject.targetObject.GetType();
+
+            foreach (var part in PropertyPathParts(property))
+            {
+                type = GetPropertyPartType(part, type, property.serializedObject);
+            }
+
+            return type;
+        }
+        
+        private static Type GetPropertyPartType(string propertyPathPart, Type type, SerializedObject serializedObject)
+        {
+            if (IsPropertyIndexer(propertyPathPart, out var fieldName, out int index))
+            {
+                var test = serializedObject.FindProperty(fieldName).GetArrayElementAtIndex(index);
+                return GetPropertyType(test);
+            }
+
+            return GetSerializedFieldInfo(type, fieldName).FieldType;
+        }
+        
+        private static FieldInfo GetSerializedFieldInfo(Type type, string name)
+        {
+            var field = GetFieldUnambiguous(type, name, BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
+
+            if (field == null)
+            {
+                throw new MissingMemberException(type.FullName, name);
+            }
+
+            return field;
+        }
+
+        public static FieldInfo GetFieldUnambiguous(Type type, string name, BindingFlags flags)
+        {
+            if (type == null || string.IsNullOrEmpty(name))
+            {
+                throw new NullReferenceException();
+            }
+            
+            flags |= BindingFlags.DeclaredOnly;
+            while (type != null)
+            {
+                var field = type.GetField(name, flags);
+
+                if (field != null)
+                {
+                    return field;
+                }
+
+                type = type.BaseType;
+            }
+
+            return null;
+        }
+        
+        public static bool IsPropertyIndexer(string propertyPart, out string fieldName, out int index)
+        {
+            var regex = new Regex(@"(.+)\[(\d+)\]");
+            var match = regex.Match(propertyPart);
+
+            if (match.Success) // Property refers to an array or list
+            {
+                fieldName = match.Groups[1].Value;
+                index = int.Parse(match.Groups[2].Value);
+                return true;
+            }
+            else
+            {
+                fieldName = propertyPart;
+                index = -1;
+                return false;
+            }
+        }
+        
+        public static string[] PropertyPathParts(this SerializedProperty property)
+        {
+            return property.FixedPropertyPath().Split('.');
+        }
+        
+        public static string FixedPropertyPath(this SerializedProperty property)
+        {
+            return property.propertyPath.Replace(".Array.data[", "[");
+        }
+        
+        private static void EnsureReflection(SerializedProperty property)
+        {
+            if (property == null)
+            {
+                throw new ArgumentNullException(nameof(property));
+            }
+
+            if (property.serializedObject.isEditingMultipleObjects)
+            {
+                throw new NotSupportedException($"Attempting to reflect property '{property.propertyPath}' on multiple objects.");
+            }
+
+            if (property.serializedObject.targetObject == null)
+            {
+                throw new NotSupportedException($"Attempting to reflect property '{property.propertyPath}' on a null object.");
+            }
         }
 
         public static Type GetPropertyType(SerializedProperty property)

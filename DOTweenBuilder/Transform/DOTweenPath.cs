@@ -28,7 +28,7 @@ namespace CCLBStudio.DOTweenBuilder
         [Tooltip("The path mode, used to determine correct LookAt options: Ignore (ignores any lookAt option passed), 3D, side-scroller 2D, top-down 2D.")]
         [SerializeField] private DOTweenPathModeVariable pathMode = new(PathMode.Full3D);
         [Tooltip("The resolution of the path (useless in case of Linear paths) : higher resolutions make for more detailed curved paths but are more expensive. Defaults to 10, but a value of 5 is usually enough if you don't have dramatic long curves between waypoints.")]
-        /*[Min(5)]*/ [SerializeField] private DOTweenIntVariable resolution = new(10);
+        [DOTMin(5)] [SerializeField] private DOTweenIntVariable resolution = new(10);
         [Tooltip("If TRUE the path will be automatically closed.")]
         [SerializeField] private DOTweenBoolVariable closePath = new(false);
         [Tooltip("The eventual movement axis to lock. You can input multiple axis if you separate them like this : AxisConstrain.X | AxisConstraint.Y.")]
@@ -41,7 +41,7 @@ namespace CCLBStudio.DOTweenBuilder
         [SerializeField] private DOTweenVector3Variable lookAtPosition = new(Vector3.zero);
         [SerializeField] private DOTweenTransformVariable lookAtTarget = new(null);
         [Tooltip("The lookAhead percentage to use when orienting to the path (0 to 1).")]
-        /*[Range(0f, 1f)]*/ [SerializeField] private DOTweenFloatVariable lookAtAhead = new(0.01f);
+        [DOTRange(0f, 1f)] [SerializeField] private DOTweenFloatVariable lookAtAhead = new(0.01f);
 
         public override Tween Generate()
         {

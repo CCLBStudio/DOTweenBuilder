@@ -1,9 +1,10 @@
 using UnityEngine;
 using DG.Tweening;
-namespace CCLBStudio.DOTweenBuilder
+
+namespace CCLBStudio.DOTweenBuilder
 {
-    [CreateAssetMenu(menuName = "Reaali/Systems/DOTween Builder/Values/DOTweenVector3Value", fileName = "NewDOTweenVector3Value")]
+    [CreateAssetMenu(menuName = "CCLB Studio/Systems/DOTween Builder/Values/DOTweenVector3Value", fileName = "NewDOTweenVector3Value")]
     public class DOTweenVector3Value : DOTweenScriptableValue<Vector3>
     {
     }
-}
+}

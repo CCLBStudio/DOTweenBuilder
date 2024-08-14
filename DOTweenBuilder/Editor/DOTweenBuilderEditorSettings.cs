@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace CCLBStudio.DOTweenBuilder
 {
-    [CreateAssetMenu(menuName = "Reaali/Systems/DOTween Builder/Editor Settings", fileName = "DOTweenBuilderEditorSettings")]
+    [CreateAssetMenu(menuName = "CCLB Studio/Systems/DOTween Builder/Editor Settings", fileName = "DOTweenBuilderEditorSettings")]
     public class DOTweenBuilderEditorSettings : ScriptableObject
     {
         public static string PlayerPrefTemplateCheckRequired => "DOTweenBuilder_requireTemplateCheck";
@@ -12,7 +12,8 @@ namespace CCLBStudio.DOTweenBuilder
         public string DOTweenVariableTemplateId => "DOTweenVariable";
         public string DOTweenScriptableValueTemplateId => "DOTweenScriptableValue";
         public static List<DOTweenTrackedType> TrackedTypes { get; set; }
-        public static List<DOTweenTrackedType> TrackedScriptableVariableTypes { get; set; }
+        public static List<DOTweenTrackedType> TrackedScriptableVariableTypes => GetTrackedScriptableTypes();
+        private static bool _updatedTrackedSoTypes = false;
 
         public Color deleteButtonColor = Color.red;
         public Color foldoutColor = Color.yellow;
@@ -22,6 +23,22 @@ namespace CCLBStudio.DOTweenBuilder
 
         public List<string> foldersToIgnore = new List<string>() {"Editor", "Main"};
         public List<TemplateFile> templateFiles;
+        
+        private static List<DOTweenTrackedType> _trackedScriptableVariableTypes;
+        
+        private static List<DOTweenTrackedType> GetTrackedScriptableTypes()
+        {
+            if (_updatedTrackedSoTypes)
+            {
+                return _trackedScriptableVariableTypes;
+            }
+
+            var tracker = new DOTweenTypesTracker();
+            _trackedScriptableVariableTypes = tracker.TrackScriptableTypes();
+            _updatedTrackedSoTypes = true;
+
+            return _trackedScriptableVariableTypes;
+        }
     }
 
     [Serializable]

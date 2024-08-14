@@ -7,12 +7,12 @@ namespace CCLBStudio.DOTweenBuilder
     [Serializable]
     public class DOTweenJump : DOTweenGenericElement<Transform, Vector3>
     {
-        [SerializeField] private Space space = Space.World;
-        [SerializeField] private float jumpPower = 1f;
-        [SerializeField] private int jumpCount = 1;
+        [SerializeField] private DOTweenSpaceVariable space = new(Space.World);
+        [SerializeField] private DOTweenFloatVariable jumpPower = new(1f);
+        [SerializeField] private DOTweenIntVariable jumpCount = new(1);
         public override Tween Generate()
         {
-            return space == Space.Self ? Target.DOLocalJump(Value, jumpPower, jumpCount, Duration, SnapToInteger) : Target.DOJump(Value, jumpPower, jumpCount, Duration, SnapToInteger);
+            return space.Value == Space.Self ? Target.DOLocalJump(Value, jumpPower.Value, jumpCount.Value, Duration, SnapToInteger) : Target.DOJump(Value, jumpPower.Value, jumpCount.Value, Duration, SnapToInteger);
         }
     }
 }

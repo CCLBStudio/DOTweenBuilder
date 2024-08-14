@@ -9,7 +9,7 @@ namespace CCLBStudio.DOTweenBuilder
     {
         public override Tween Generate()
         {
-            return Target.DOShakeAnchorPos(Duration, Value, vibrato, randomness, SnapToInteger, fadeOut, randomnessMode);
+            return Target.DOShakeAnchorPos(Duration, Value, Vibrato, Randomness, SnapToInteger, FadeOut, RandomnessMode);
         }
     }
 }

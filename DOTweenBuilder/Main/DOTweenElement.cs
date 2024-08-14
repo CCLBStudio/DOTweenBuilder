@@ -45,7 +45,7 @@ namespace CCLBStudio.DOTweenBuilder
 
         public bool Enabled => enabled.Value;
         public AbsorbType AbsorbBehaviour => absorbBehaviour.Value;
-        public float Duration => Mathf.Max(0f, duration.Value);
+        public float Duration => duration.Value;
         public DOTweenEase Easing => easing;
         public bool SnapToInteger => snapToInteger.Value;
         public bool PrependInterval => prependInterval;
@@ -62,7 +62,7 @@ namespace CCLBStudio.DOTweenBuilder
         public bool Loop => loop;
         public int LoopCount => loopCount;
         public LoopType LoopType => loopType;
-        public float Delay => Mathf.Max(0f, delay.Value);
+        public float Delay => delay.Value;
 
         public UnityEvent OnPlayCallback => onPlayCallback;
         public UnityEvent OnUpdateCallback => onUpdateCallback;
@@ -75,6 +75,7 @@ namespace CCLBStudio.DOTweenBuilder
         [Tooltip("Determines how this Tween will be inserted in the sequence : Prepend = at the beginning, Append = at the end, Join = at the same time of the previous Tween.")]
         [SerializeField] private DOTweenAbsorbTypeVariable absorbBehaviour = new(AbsorbType.Append);
         [Tooltip("The duration of this Tween.")]
+        [DOTMin(0f)]
         [SerializeField] private DOTweenFloatVariable duration = new(1f);
         [Tooltip("The ease function to use for this Tween.")]
         [SerializeField] private DOTweenEase easing;
@@ -83,6 +84,7 @@ namespace CCLBStudio.DOTweenBuilder
         [Tooltip("If TRUE, the tween will loop the given amount of times.")]
         [SerializeField] private bool loop;
         [Tooltip("Any value > 0 will add a delay of the given amount to this Tween.")]
+        [DOTMin(0f)]
         [SerializeField] private DOTweenFloatVariable delay =new(0f);
         [Tooltip("How many time this Tween will loop ?")]
         [Min(2)] [SerializeField] private int loopCount = 2;

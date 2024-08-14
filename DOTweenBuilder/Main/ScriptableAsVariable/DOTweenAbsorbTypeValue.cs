@@ -1,10 +1,10 @@
 using UnityEngine;
+using DG.Tweening;
 
-namespace CCLBStudio.DOTweenBuilder
+namespace CCLBStudio.DOTweenBuilder
 {
-    [CreateAssetMenu(menuName = "Reaali/Systems/DOTween Builder/Values/Absorb Type Value", fileName = "NewAbsorbTypeValue")]
+    [CreateAssetMenu(menuName = "CCLB Studio/Systems/DOTween Builder/Values/DOTweenAbsorbTypeValue", fileName = "NewDOTweenAbsorbTypeValue")]
     public class DOTweenAbsorbTypeValue : DOTweenScriptableValue<AbsorbType>
     {
-    
     }
-}
+}

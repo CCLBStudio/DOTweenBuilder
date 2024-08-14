@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using CCLBStudio;
 using CCLBStudioEditor;
 using UnityEditor;
 using UnityEngine;
@@ -10,92 +9,66 @@ namespace CCLBStudio.DOTweenBuilder
     [CustomPropertyDrawer(typeof(DOTweenVariable<,>), true)]
     public class DOTweenVariableDrawer : PropertyDrawer
     {
-        private readonly Dictionary<string, DOTweenVariableProperties> _knownProperties = new ();
+        protected readonly Dictionary<string, DOTweenVariableProperties> knownProperties = new ();
         
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
-            if (!_knownProperties.ContainsKey(property.propertyPath))
-            {
-                _knownProperties[property.propertyPath] = new DOTweenVariableProperties
-                {
-                    useScriptable = property.FindPropertyRelative(DOTweenVariable<dynamic, DOTweenScriptableValue<dynamic>>.UseScriptableProperty),
-                    value = property.FindPropertyRelative(DOTweenVariable<dynamic, DOTweenScriptableValue<dynamic>>.ValueProperty),
-                    scriptableValue = property.FindPropertyRelative(DOTweenVariable<dynamic, DOTweenScriptableValue<dynamic>>.ScriptableValueProperty),
-                    swapButtonStyle = new GUIStyle(GUI.skin.button)
-                    {
-                        imagePosition = ImagePosition.TextOnly,
-                        fixedHeight = 17,
-                        fixedWidth = 22
-                    }
-                };
-
-                _knownProperties[property.propertyPath].valuePositionOffset = _knownProperties[property.propertyPath].value.isArray ? 15f : 0f;
-            }
-            
-            var properties = _knownProperties[property.propertyPath];
+            CheckForKnownProperty(property);
+            var properties = knownProperties[property.propertyPath];
 
             DrawSwapButton(properties, ref position);
+            DrawVariableProperties(properties, ref position, label);
+        }
 
-            if (!properties.useScriptable.boolValue)
+        protected void CheckForKnownProperty(SerializedProperty property)
+        {
+            if (knownProperties.ContainsKey(property.propertyPath))
             {
-                position.x += properties.valuePositionOffset;
-                position.width -= properties.valuePositionOffset;
-                EditorGUI.PropertyField(position, properties.value, label);
                 return;
             }
-
-            float availableWidth = position.width;
-            position.width = Mathf.Min(EditorGUIUtility.labelWidth + 400f, availableWidth / 1.3f);
-            EditorGUI.PropertyField(position, properties.scriptableValue, label);
             
-            float delta = position.width + 15;
-            position.x += delta;
-            availableWidth -= delta;
-            position.width = Mathf.Min(100f, availableWidth);
-            if (GUI.Button(position, "Create New"))
+            knownProperties[property.propertyPath] = new DOTweenVariableProperties
             {
-                Type parameterType = GetBaseGenericType(fieldInfo.FieldType).GetGenericArguments()[1];
-
-                if (parameterType.IsGenericType)
+                useScriptable = property.FindPropertyRelative(DOTweenVariable<dynamic, DOTweenScriptableValue<dynamic>>.UseScriptableProperty),
+                value = property.FindPropertyRelative(DOTweenVariable<dynamic, DOTweenScriptableValue<dynamic>>.ValueProperty),
+                scriptableValue = property.FindPropertyRelative(DOTweenVariable<dynamic, DOTweenScriptableValue<dynamic>>.ScriptableValueProperty),
+                swapButtonStyle = new GUIStyle(GUI.skin.button)
                 {
-                    Type genericType = parameterType.GetGenericArguments()[0];
-                    int index = DOTweenBuilderEditorSettings.TrackedScriptableVariableTypes.FindIndex(x => x.valueType == genericType);
-                    if (index < 0)
-                    {
-                        Debug.LogWarning($"No tracked type correspond to {genericType.Name}. Unable to create the Scriptable variable.");
-                        return;
-                    }
-
-                    parameterType = DOTweenBuilderEditorSettings.TrackedScriptableVariableTypes[index].type;
+                    imagePosition = ImagePosition.TextOnly,
+                    fixedHeight = 17,
+                    fixedWidth = 22
                 }
+            };
                 
-                var instance = EditorExtender.CreateScriptableAsset(parameterType, "RENAME-ME--REPLACE-ME");
-                
-                if (!properties.scriptableValue.objectReferenceValue)
-                {
-                    properties.scriptableValue.objectReferenceValue = instance;
-                }
-                
-                SerializedObject instanceSerializedObj = new SerializedObject(instance);
-                AssignDefaultValue(instanceSerializedObj, properties.value);
-                EditorUtility.SetDirty(instance);
-            }
+            
+            knownProperties[property.propertyPath].valuePositionOffset = RequireOffset(property.propertyPath) ? 15f : 0f;
         }
 
         public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
         {
-            if (!_knownProperties.ContainsKey(property.propertyPath))
+            if (!knownProperties.ContainsKey(property.propertyPath))
             {
                 return base.GetPropertyHeight(property, label);
             }
             
-            var properties = _knownProperties[property.propertyPath];
-            if (properties.useScriptable.boolValue == false && properties.value.isArray)
+            var properties = knownProperties[property.propertyPath];
+            if (properties.useScriptable.boolValue == false && RequireOffset(property.propertyPath))
             {
                 return EditorGUI.GetPropertyHeight(properties.value);
             }
 
             return base.GetPropertyHeight(property, label);
+        }
+
+        private bool RequireOffset(string propertyPath)
+        {
+            if (knownProperties[propertyPath].value.isArray)
+            {
+                return true;
+            }
+            
+            var type = EditorExtender.GetUnderlyingPropertyType(knownProperties[propertyPath].value);
+            return type == typeof(Vector4);
         }
 
         private void AssignDefaultValue(SerializedObject serializedObject, SerializedProperty defaultProperty)
@@ -237,7 +210,7 @@ namespace CCLBStudio.DOTweenBuilder
             serializedObject.ApplyModifiedProperties();
         }
 
-        private void DrawSwapButton(DOTweenVariableProperties properties, ref Rect position)
+        protected void DrawSwapButton(DOTweenVariableProperties properties, ref Rect position)
         {
             float width = position.width;
             float diffX = 14;
@@ -266,6 +239,54 @@ namespace CCLBStudio.DOTweenBuilder
             position.height = EditorGUIUtility.singleLineHeight;
         }
 
+        protected void DrawVariableProperties(DOTweenVariableProperties properties, ref Rect position, GUIContent label)
+        {
+            if (!properties.useScriptable.boolValue)
+            {
+                position.x += properties.valuePositionOffset;
+                position.width -= properties.valuePositionOffset;
+                EditorGUI.PropertyField(position, properties.value, label);
+                return;
+            }
+
+            float availableWidth = position.width;
+            position.width = Mathf.Min(EditorGUIUtility.labelWidth + 400f, availableWidth / 1.3f);
+            EditorGUI.PropertyField(position, properties.scriptableValue, label);
+            
+            float delta = position.width + 15;
+            position.x += delta;
+            availableWidth -= delta;
+            position.width = Mathf.Min(100f, availableWidth);
+            if (GUI.Button(position, "Create New"))
+            {
+                Type parameterType = GetBaseGenericType(fieldInfo.FieldType).GetGenericArguments()[1];
+
+                if (parameterType.IsGenericType)
+                {
+                    Type genericType = parameterType.GetGenericArguments()[0];
+                    int index = DOTweenBuilderEditorSettings.TrackedScriptableVariableTypes.FindIndex(x => x.valueType == genericType);
+                    if (index < 0)
+                    {
+                        Debug.LogWarning($"No tracked type correspond to {genericType.Name}. Unable to create the Scriptable variable.");
+                        return;
+                    }
+
+                    parameterType = DOTweenBuilderEditorSettings.TrackedScriptableVariableTypes[index].type;
+                }
+                
+                var instance = EditorExtender.CreateScriptableAsset(parameterType, "RENAME-ME--REPLACE-ME");
+                
+                if (!properties.scriptableValue.objectReferenceValue)
+                {
+                    properties.scriptableValue.objectReferenceValue = instance;
+                }
+                
+                SerializedObject instanceSerializedObj = new SerializedObject(instance);
+                AssignDefaultValue(instanceSerializedObj, properties.value);
+                EditorUtility.SetDirty(instance);
+            }
+        }
+
         private Type GetBaseGenericType(Type startType)
         {
             Type result = startType;
@@ -285,7 +306,7 @@ namespace CCLBStudio.DOTweenBuilder
             return result;
         }
 
-        private class DOTweenVariableProperties
+        protected class DOTweenVariableProperties
         {
             public SerializedProperty useScriptable;
             public SerializedProperty value;

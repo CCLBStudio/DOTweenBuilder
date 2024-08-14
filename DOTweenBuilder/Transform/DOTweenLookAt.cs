@@ -14,11 +14,11 @@ namespace CCLBStudio.DOTweenBuilder
 #endif
 
         [Tooltip("The eventual rotation axis to lock. You can input multiple axis if you separate them like this : AxisConstrain.X | AxisConstraint.Y.")]
-        [SerializeField] private AxisConstraint axisConstraint = AxisConstraint.None;
+        [SerializeField] private DOTweenAxisConstraintVariable axisConstraint = new(AxisConstraint.None);
         
         public override Tween Generate()
         {
-            return Target.DOLookAt(Value.position, Duration, axisConstraint);
+            return Target.DOLookAt(Value.position, Duration, axisConstraint.Value);
         }
     }
 }

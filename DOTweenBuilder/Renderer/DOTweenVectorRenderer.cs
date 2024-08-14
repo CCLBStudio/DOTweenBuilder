@@ -12,7 +12,7 @@ namespace CCLBStudio.DOTweenBuilder
             AssignPropertyId();
             var sq = DOTween.Sequence();
 
-            foreach (var m in useSharedMaterials ? Target.sharedMaterials : Target.materials)
+            foreach (var m in UseSharedMaterials ? Target.sharedMaterials : Target.materials)
             {
                 sq.Join(m.DOVector(Value, propertyId, Duration));
             }

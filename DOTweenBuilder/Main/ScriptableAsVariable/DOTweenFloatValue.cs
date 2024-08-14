@@ -1,10 +1,10 @@
 using UnityEngine;
+using DG.Tweening;
 
-namespace CCLBStudio.DOTweenBuilder
+namespace CCLBStudio.DOTweenBuilder
 {
-    [CreateAssetMenu(menuName = "Reaali/Systems/DOTween Builder/Values/Float Value", fileName = "NewFloatValue")]
+    [CreateAssetMenu(menuName = "CCLB Studio/Systems/DOTween Builder/Values/DOTweenFloatValue", fileName = "NewDOTweenFloatValue")]
     public class DOTweenFloatValue : DOTweenScriptableValue<float>
     {
-    
     }
-}
+}

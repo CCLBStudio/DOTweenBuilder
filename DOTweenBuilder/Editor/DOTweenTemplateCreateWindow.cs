@@ -1,5 +1,4 @@
 using System.IO;
-using CCLBStudio;
 using CCLBStudioEditor;
 using DG.Tweening;
 using TMPro;
@@ -14,10 +13,11 @@ namespace CCLBStudio.DOTweenBuilder
         public bool requireFolderGeneration;
         public bool requireFileGeneration;
         private static readonly string[] DefaultTypes = new[] { "bool", "float", "string", "int", "TransformArray", nameof(Renderer), nameof(TextMeshProUGUI), nameof(Image), nameof(CanvasGroup), nameof(RectTransform),
-            nameof(Vector2), nameof(Vector3), nameof(Transform), nameof(Camera), nameof(GameObject), nameof(AbsorbType), nameof(DOTweenEase), nameof(LoopType), nameof(DOTweenAxis), nameof(DOTweenAxis2D),
-            nameof(DOTweenCameraClipPlane) , nameof(DOTweenAnchorType), nameof(Space), nameof(PathType), nameof(PathMode), nameof(AxisConstraint), nameof(DOTweenPathLookAtOption)};
+            nameof(Vector2), nameof(Vector3), nameof(Vector4), nameof(Transform), nameof(Camera), nameof(GameObject), nameof(AbsorbType), nameof(DOTweenEase), nameof(LoopType), nameof(DOTweenAxis), nameof(DOTweenAxis2D),
+            nameof(DOTweenCameraClipPlane) , nameof(DOTweenAnchorType), nameof(Space), nameof(PathType), nameof(PathMode), nameof(AxisConstraint), nameof(DOTweenPathLookAtOption), nameof(ShakeRandomnessMode), nameof(RotateMode)};
         private string _templateFolderPath;
         private DOTweenBuilderEditorSettings _settings;
+        private bool _forceRefresh = false;
 
         [MenuItem("Tools/Demigiant/DOTween Builder Utility Panel")]
         public static void ShowWindow()
@@ -33,6 +33,8 @@ namespace CCLBStudio.DOTweenBuilder
 
         private void OnGUI()
         {
+            _forceRefresh = EditorGUILayout.Toggle("Force Refresh", _forceRefresh);
+            
             if (!requireFolderGeneration && !requireFileGeneration)
             {
                 if (GUILayout.Button("Generate Default Types"))
@@ -45,54 +47,55 @@ namespace CCLBStudio.DOTweenBuilder
                         return;
                     }
 
-                    // string variableTemplate = _settings.templateFiles[variableIndex].fileContent;
-                    // string scriptableValueTemplate = _settings.templateFiles[scriptableValueIndex].fileContent;
-                    //
-                    // string relativePath = AssetDatabase.GetAssetPath(_settings);
-                    // string parent = Directory.GetParent(relativePath)?.FullName;
-                    // string mainFolder = parent + "/Main/";
-                    // string scriptableValueFolder = mainFolder + "ScriptableAsVariable/";
-                    // string variableFolder = mainFolder + "DOTweenVariable/";
-                    // bool createdOne = false;
+                    string variableTemplate = _settings.templateFiles[variableIndex].fileContent;
+                    string scriptableValueTemplate = _settings.templateFiles[scriptableValueIndex].fileContent;
                     
-                    // foreach (var typeName in DefaultTypes)
-                    // {
-                    //     string typeCapitalized = char.ToUpper(typeName[0]) + typeName.Substring(1);
-                    //     bool hasPrefix = typeCapitalized.StartsWith("DOTween");
-                    //     string scriptableValueName = hasPrefix ? $"{typeCapitalized}Value" : $"DOTween{typeCapitalized}Value";
-                    //     string scriptableValuePath = scriptableValueFolder + scriptableValueName + ".cs";
-                    //     string variableName = hasPrefix ? $"{typeCapitalized}Variable" : $"DOTween{typeCapitalized}Variable";
-                    //     string variablePath = variableFolder + variableName + ".cs";
-                    //     string realTypeName = typeName.EndsWith("Array") ? typeName.Replace("Array", "[]") : typeName;
-                    //
-                    //     if (!File.Exists(scriptableValuePath))
-                    //     {
-                    //         string content = scriptableValueTemplate.Replace("#SCRIPTNAME#", scriptableValueName).Replace("TYPE", realTypeName);
-                    //         File.WriteAllText(scriptableValuePath, content);
-                    //         createdOne = true;
-                    //     }
-                    //     else
-                    //     {
-                    //         Debug.Log($"Script {scriptableValueName} already exist.");
-                    //     }
-                    //
-                    //     if (!File.Exists(variablePath))
-                    //     {
-                    //         string content = variableTemplate.Replace("#SCRIPTNAME#", variableName).Replace("SCRIPTABLETYPE", scriptableValueName).Replace("TYPE", realTypeName);
-                    //         File.WriteAllText(variablePath, content);
-                    //         createdOne = true;
-                    //     }
-                    //     else
-                    //     {
-                    //         Debug.Log($"Script {variableName} already exist.");
-                    //     }
-                    // }
-                    //
-                    // if (createdOne)
-                    // {
-                    //     AssetDatabase.SaveAssets();
-                    //     AssetDatabase.Refresh();
-                    // }
+                    string relativePath = AssetDatabase.GetAssetPath(_settings);
+                    string editorFolder = Directory.GetParent(relativePath)?.FullName;
+                    string baseFolder = Directory.GetParent(editorFolder)?.FullName;
+                    string mainFolder = baseFolder + "/Main/";
+                    string scriptableValueFolder = mainFolder + "ScriptableAsVariable/";
+                    string variableFolder = mainFolder + "DOTweenVariable/";
+                    bool createdOne = false;
+                    
+                    foreach (var typeName in DefaultTypes)
+                    {
+                        string typeCapitalized = char.ToUpper(typeName[0]) + typeName.Substring(1);
+                        bool hasPrefix = typeCapitalized.StartsWith("DOTween");
+                        string scriptableValueName = hasPrefix ? $"{typeCapitalized}Value" : $"DOTween{typeCapitalized}Value";
+                        string scriptableValuePath = scriptableValueFolder + scriptableValueName + ".cs";
+                        string variableName = hasPrefix ? $"{typeCapitalized}Variable" : $"DOTween{typeCapitalized}Variable";
+                        string variablePath = variableFolder + variableName + ".cs";
+                        string realTypeName = typeName.EndsWith("Array") ? typeName.Replace("Array", "[]") : typeName;
+                    
+                        if (!File.Exists(scriptableValuePath)  || _forceRefresh)
+                        {
+                            string content = scriptableValueTemplate.Replace("#SCRIPTNAME#", scriptableValueName).Replace("TYPE", realTypeName);
+                            File.WriteAllText(scriptableValuePath, content);
+                            createdOne = true;
+                        }
+                        else
+                        {
+                            Debug.Log($"Script {scriptableValueName} already exist.");
+                        }
+                    
+                        if (!File.Exists(variablePath) || _forceRefresh)
+                        {
+                            string content = variableTemplate.Replace("#SCRIPTNAME#", variableName).Replace("SCRIPTABLETYPE", scriptableValueName).Replace("TYPE", realTypeName);
+                            File.WriteAllText(variablePath, content);
+                            createdOne = true;
+                        }
+                        else
+                        {
+                            Debug.Log($"Script {variableName} already exist.");
+                        }
+                    }
+                    
+                    if (createdOne)
+                    {
+                        AssetDatabase.SaveAssets();
+                        AssetDatabase.Refresh();
+                    }
                 }
                 
                 return;

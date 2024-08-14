@@ -15,9 +15,18 @@ namespace CCLBStudio.DOTweenBuilder
         #endif
         #endregion
         
-        [SerializeField] protected int vibrato = 10;
-        [SerializeField] protected float randomness = 90f;
-        [SerializeField] protected bool fadeOut = true;
-        [SerializeField] protected ShakeRandomnessMode randomnessMode = ShakeRandomnessMode.Full;
+        protected int Vibrato => vibrato.Value;
+        protected float Randomness => randomness.Value;
+        protected bool FadeOut => fadeOut.Value;
+        protected ShakeRandomnessMode RandomnessMode => randomnessMode.Value;
+        
+        [Tooltip("How much will the shake vibrate.")]
+        [SerializeField] private DOTweenIntVariable vibrato = new(10);
+        [Tooltip("How much the shake will be random (0 to 180 - values higher than 90 kind of suck, so beware). Setting it to 0 will shake along a single direction.")]
+        [SerializeField] private DOTweenFloatVariable randomness = new(90f);
+        [Tooltip("If TRUE the shake will automatically fadeOut smoothly within the tween's duration, otherwise it will not.")]
+        [SerializeField] private DOTweenBoolVariable fadeOut = new(true);
+        [Tooltip("The type of randomness to apply, Full (fully random) or Harmonic (more balanced and visually more pleasant).")]
+        [SerializeField] private DOTweenShakeRandomnessModeVariable randomnessMode = new(ShakeRandomnessMode.Full);
     }
 }

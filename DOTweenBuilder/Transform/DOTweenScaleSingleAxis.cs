@@ -7,23 +7,16 @@ namespace CCLBStudio.DOTweenBuilder
     [Serializable]
     public class DOTweenScaleSingleAxis : DOTweenGenericElement<Transform, float>
     {
-        [SerializeField] private DOTweenAxis axis;
+        [SerializeField] private DOTweenAxisVariable axis = new(DOTweenAxis.Y);
         public override Tween Generate()
         {
-            switch (axis)
+            return axis.Value switch
             {
-                case DOTweenAxis.X:
-                    return Target.DOScaleX(Value, Duration);
-                
-                case DOTweenAxis.Y:
-                    return Target.DOScaleY(Value, Duration);
-                
-                case DOTweenAxis.Z:
-                    return Target.DOScaleZ(Value, Duration);
-                
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
+                DOTweenAxis.X => Target.DOScaleX(Value, Duration),
+                DOTweenAxis.Y => Target.DOScaleY(Value, Duration),
+                DOTweenAxis.Z => Target.DOScaleZ(Value, Duration),
+                _ => throw new ArgumentOutOfRangeException()
+            };
         }
     }
 }

@@ -13,9 +13,9 @@ namespace CCLBStudio.DOTweenBuilder
             
             var sq = DOTween.Sequence();
             
-            if (string.IsNullOrEmpty(property))
+            if (string.IsNullOrEmpty(Property))
             {
-                foreach (var m in useSharedMaterials ? Target.sharedMaterials : Target.materials)
+                foreach (var m in UseSharedMaterials ? Target.sharedMaterials : Target.materials)
                 {
                     sq.Join(m.DOTiling(Value, Duration));
                 }
@@ -23,7 +23,7 @@ namespace CCLBStudio.DOTweenBuilder
                 return sq;
             }
 
-            foreach (var m in useSharedMaterials ? Target.sharedMaterials : Target.materials)
+            foreach (var m in UseSharedMaterials ? Target.sharedMaterials : Target.materials)
             {
                 sq.Join(m.DOTiling(Value, propertyId, Duration));
             }

@@ -8,16 +8,13 @@ using UnityEngine;
 
 namespace CCLBStudio.DOTweenBuilder
 {
-    [InitializeOnLoad]
-    public static class DOTweenTypesTracker
+    public class DOTweenTypesTracker
     {
-        static DOTweenTypesTracker()
+        private readonly string _scriptableValueFolder;
+
+        public DOTweenTypesTracker()
         {
             var settings = EditorExtender.LoadScriptableAsset<DOTweenBuilderEditorSettings>();
-            if (!settings)
-            {
-                return;
-            }
             
             string relativePath = AssetDatabase.GetAssetPath(settings);
             string absolutePath = Path.GetFullPath(relativePath);
@@ -28,12 +25,9 @@ namespace CCLBStudio.DOTweenBuilder
                 Debug.LogError($"No folder at path {settingsFolder}, this is not normal.");
                 return;
             }
-
-            string parentFolder = Directory.GetParent(settingsFolder)?.FullName;
-            string scriptableValueFolder = parentFolder + "/Main/ScriptableAsVariable/";
             
-            //TrackElementTypes(parentFolder, settings);
-            TrackScriptableTypes(scriptableValueFolder);
+            string parentFolder = Directory.GetParent(settingsFolder)?.FullName;
+            _scriptableValueFolder = parentFolder + "/Main/ScriptableAsVariable/";
         }
 
         private static void TrackElementTypes(string parentFolder, DOTweenBuilderEditorSettings settings)
@@ -65,14 +59,20 @@ namespace CCLBStudio.DOTweenBuilder
             }
         }
 
-        private static void TrackScriptableTypes(string scriptableValueFolder)
+        public List<DOTweenTrackedType> TrackScriptableTypes()
         {
-            DOTweenBuilderEditorSettings.TrackedScriptableVariableTypes = new List<DOTweenTrackedType>();
-            IEnumerable<string> files = Directory.EnumerateFiles(scriptableValueFolder, "*cs", SearchOption.AllDirectories);
+            if (string.IsNullOrEmpty(_scriptableValueFolder))
+            {
+                return null;
+            }
+
+            var tracked = new List<DOTweenTrackedType>();
+
+            IEnumerable<string> files = Directory.EnumerateFiles(_scriptableValueFolder, "*cs", SearchOption.AllDirectories);
             foreach (var file in files)
             {
-                string relative = "Assets/" + Path.GetRelativePath(Application.dataPath, file);
-                Type type = AssetDatabase.LoadAssetAtPath<MonoScript>(relative).GetClass();
+                string relativePath = "Assets/" + Path.GetRelativePath(Application.dataPath, file);
+                Type type = AssetDatabase.LoadAssetAtPath<MonoScript>(relativePath).GetClass();
                 if (null == type)
                 {
                     continue;
@@ -83,12 +83,15 @@ namespace CCLBStudio.DOTweenBuilder
                     continue;
                 }
                 
-                DOTweenBuilderEditorSettings.TrackedScriptableVariableTypes.Add(new DOTweenTrackedType
+                tracked.Add(new DOTweenTrackedType
                 {
                     type = type,
                     valueType = genericParam
                 });
             }
+            
+            tracked.TrimExcess();
+            return tracked;
         }
 
         private static Type[] GetGenericArguments(Type from)
