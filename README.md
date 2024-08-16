@@ -8,11 +8,23 @@ Everything takes place in a single Monobehaviour, directly in the inspector.
 Almost every parameter has two ways to set its value : the first is the default way of setting a variable in the inspector. The second is through a dedicated ScriptableObject that will hold the value. For more information, see the dedicated section.
 
 ## How To Use
-When you want to create a new tween effect simply add the component DOTweenBuilder on one of your GameObjects.
+When you want to create a new tween effect simply add the component DOTweenBuilder on one of your GameObjects :
 <br>
-![Mon Image](https://github.com/AymNAym/DOTweenBuilderImages/blob/main/DOTweenBuilder.png)
+
+![](https://github.com/AymNAym/DOTweenBuilderImages/blob/main/DOTweenBuilder.png)
+<br>
+
 To add a new effect, click the "New" button and select the one you desire. Once selected, a new entry will be created in
-the list and you can tweak its settings as you need. You will then need a reference to this DOTweenBuilder and call its Play() method.
+the list and you can tweak its settings as you need :
+
+![](https://github.com/AymNAym/DOTweenBuilderImages/blob/main/NewEntry.png) ![](https://github.com/AymNAym/DOTweenBuilderImages/blob/main/NewEntry2.png)
+<br>
+
+You will then need a reference to this DOTweenBuilder and call its Play() method :
+<br>
+
+![](https://github.com/AymNAym/DOTweenBuilderImages/blob/main/Play.png)
+<br>
 
 ## Installation
 You can add this tool to your project by downloading the unity package file in the release section or by cloning the repository in your project.
@@ -43,3 +55,54 @@ Most of the settings of this component are straightforward, except maybe the Pla
 
 ### Element Settings
 Each existing element has a combination of common and unique settings. If you are not sure what a setting does, refer yourself to the official DOTween documentation : https://dotween.demigiant.com/documentation.php
+<br><br>
+You may have notice this symbol on the left of many variables :
+
+<br>
+<img src="https://github.com/AymNAym/DOTweenBuilderImages/blob/main/DOTween-Icon-Normal.png" alt="Mon Image" width="200" height="200"/>
+<br>
+
+This means that this value can be set in two different ways. The first is the default way to tweak a value in the inspector, and the second one is through a dedicated scriptable object :
+<br>
+
+![](https://github.com/AymNAym/DOTweenBuilderImages/blob/main/VariableDefault.png) ![](https://github.com/AymNAym/DOTweenBuilderImages/blob/main/VariableScriptableObject.png)
+<br>
+
+The Scriptable Object is just a very simple object that only contains one field of the type of the variable. In the example just above, the Scriptable Object contains one field of type Transform :
+<br>
+
+![](https://github.com/AymNAym/DOTweenBuilderImages/blob/main/ScriptableValue.png)
+<br>
+
+This allow you to reference this Scriptable Object in another script, and modify the value in it as you wish. The next time you will call the Play() method of this DOTweenBuilder, the new value will be used. For example, this can be usefull
+when you want to disable/enable a specific tween depending on runtime conditions :
+<br>
+
+![](https://github.com/AymNAym/DOTweenBuilderImages/blob/main/DOTweenBuilderEnableBySo.png) ![](https://github.com/AymNAym/DOTweenBuilderImages/blob/main/UsingSoValueInScript.png) ![](https://github.com/AymNAym/DOTweenBuilderImages/blob/main/TesterInspector.png)
+
+
+#### Important : In the editor, when exiting playmode, the Scriptable Object will automatically reset its value to the value it had when entering playmode. This mimic the behaviour of a Scriptable Object in a final build.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
