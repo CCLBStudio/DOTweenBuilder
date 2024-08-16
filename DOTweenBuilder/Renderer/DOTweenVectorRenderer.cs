@@ -5,7 +5,7 @@ using UnityEngine;
 namespace CCLBStudio.DOTweenBuilder
 {
     [Serializable]
-    public class DOTweenVectorRenderer : DOTweenRendererElement<Vector4>
+    public class DOTweenVectorRenderer : DOTweenRendererElement<Vector3>
     {
         public override Tween Generate()
         {
