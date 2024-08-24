@@ -83,6 +83,60 @@ when you want to disable/enable a specific tween depending on runtime conditions
 
 #### Important : In the editor, when exiting playmode, the Scriptable Object will automatically reset its value to the value it had when entering playmode. This mimic the behaviour of a Scriptable Object in a final build.
 
+### Creating Custom Element
+If you need, you can create a custom element that you will be able to use as a DOTweenBuilder element. Navigate to the DOTweenBuilder folder :
+<br>
+
+![](https://github.com/AymNAym/DOTweenBuilderImages/blob/main/MainFolder.png)
+
+When you click the "Add New" button on a DOTweenBuilder component, it actually looks into this folder and uses the folder names to build the context menu that you see. Each script in every folder then populates the related context menu element :
+<br>
+
+![](https://github.com/AymNAym/DOTweenBuilderImages/blob/main/ContextMenuBuild.png) ![](https://github.com/AymNAym/DOTweenBuilderImages/blob/main/ContextMenuElementsBuild.png)
+<br>
+
+So, let's say you want to create a new element for a custom type named "MyCustomType". You need to create a new folder in the DOTweenBuilder folder that will contains the script for your custom element :
+<br>
+
+![](https://github.com/AymNAym/DOTweenBuilderImages/blob/main/CustomFolder.png)
+
+You then need to create the script that will be usable as a DOTweenBuilder element. The naming convention for this kind of script is DOTween{YOUR-EFFECT-NAME} :<br>
+
+![](https://github.com/AymNAym/DOTweenBuilderImages/blob/main/DOTweenCustomElement.png)
+<br>
+
+This script needs to derive from DOTweenGenericElement<,>. This is a generic type that takes two arguments : the first one is the type of your target, and the second one is the type of the value you want to tween. In our example
+the first parameter is MyCustomType, which contains a public float "valueToTween". Our second parameter is then float :<br>
+
+![](https://github.com/AymNAym/DOTweenBuilderImages/blob/main/CustomElementScript1.png)
+<br>
+
+As you see, the compilator gives you an error. Thats because you need to implement the asbtract method "Generate()" that will contains the tweening logic. This method returns a Tween object :<br>
+
+![](https://github.com/AymNAym/DOTweenBuilderImages/blob/main/CustomElementScript2.png)
+
+You can then write the logic you want for your element, using the DOTween methods :<br>
+
+![](https://github.com/AymNAym/DOTweenBuilderImages/blob/main/CustomElementScript3.png)
+
+Last but not leat, you need to add the [Serializable] tag to your class :<br>
+
+![](https://github.com/AymNAym/DOTweenBuilderImages/blob/main/CustomElementScript4.png)
+
+At this point you can use this component in any DOTweenBuilder :<br>
+
+![](https://github.com/AymNAym/DOTweenBuilderImages/blob/main/CustomElementInContext.png)
+
+Note that you can add serialized properties in your custom element :<br>
+
+![](https://github.com/AymNAym/DOTweenBuilderImages/blob/main/CustomElementScript5.png) ![](https://github.com/AymNAym/DOTweenBuilderImages/blob/main/CustomElementInContext2.png)
+
+And if you want your settings to be swappable with a dedicated Scriptable Object (as seen in the previous section), you need to use the DOTweenVariable objects :<br>
+
+![](https://github.com/AymNAym/DOTweenBuilderImages/blob/main/CustomElementScript6.png) ![](https://github.com/AymNAym/DOTweenBuilderImages/blob/main/CustomElementInContext3.png)
+
+
+
 
 
 
