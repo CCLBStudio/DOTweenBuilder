@@ -119,7 +119,7 @@ You can then write the logic you want for your element, using the DOTween method
 
 ![](https://github.com/AymNAym/DOTweenBuilderImages/blob/main/CustomElementScript3.png)
 
-Last but not leat, you need to add the [Serializable] tag to your class :<br>
+Last but not least, you need to add the [Serializable] tag to your class :<br>
 
 ![](https://github.com/AymNAym/DOTweenBuilderImages/blob/main/CustomElementScript4.png)
 
